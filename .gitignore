@@ -1,0 +1,7 @@
+src/test.c
+*.o
+*.dSYM
+test
+philo
+philo_bonus
+.vscode
