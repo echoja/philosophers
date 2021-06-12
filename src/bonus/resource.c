@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:09:55 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/11 10:48:53 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/12 09:31:28 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,10 @@
 int
 	safe_exit(int code)
 {
-	long	i;
-
-	i = -1;
-	while (++i < vars()->nop)
-		pthread_mutex_destroy(&vars()->locks[i]);
-	pthread_mutex_destroy(&vars()->somebody_died_lock);
-	safe_free(&vars()->locks);
-	safe_free(&vars()->philos);
-	safe_free(&vars()->recent_meal);
 	safe_free(&vars()->remained_times);
-	safe_free(&vars()->available_forks);
+	safe_free(&vars()->philos);
+	safe_free(&vars()->pid);
+	safe_free(&vars()->recent_meal);
 	return (code);
 }
 

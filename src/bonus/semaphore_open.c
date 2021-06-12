@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_msg.c                                          :+:      :+:    :+:   */
+/*   semaphore_open.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/02 13:52:11 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 08:18:36 by taehokim         ###   ########.fr       */
+/*   Created: 2021/06/12 09:44:53 by taehokim          #+#    #+#             */
+/*   Updated: 2021/06/12 09:46:50 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <semaphore.h>
 #include "philosophers.h"
 
-void
-	put_msg(uint64_t t, long id, const char *color, const char *msg)
+int
+	so(sem_t **sem, char *name, unsigned int value, char *msg)
 {
-	int	color_index;
+	sem_t	*ret;
 
-	color_index = id % 6;
-	t = t - vars()->start;
-	printf("%10lld %s%03ld" ANSI_COLOR_RESET " %s%s\n" ANSI_COLOR_RESET, t,
-		vars()->color[color_index], id + 1, color, msg);
+	ret = sem_open(name, O_CREAT, 0644, value);
+	if (ret == SEM_FAILED)
+		return (print_and_return_code(1, msg));
+	*sem = ret;
+	return (0);
+}
+
+int
+	so_weak(sem_t **sem, char *name, char *msg)
+{
+	sem_t	*ret;
+
+	ret = sem_open(name, 0);
+	if (ret == SEM_FAILED)
+		return (print_and_return_code(1, msg));
+	*sem = ret;
+	return (0);
 }

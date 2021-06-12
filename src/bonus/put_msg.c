@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:52:11 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 08:18:36 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/12 08:42:32 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void
 
 	color_index = id % 6;
 	t = t - vars()->start;
-	printf("%10lld %s%03ld" ANSI_COLOR_RESET " %s%s\n" ANSI_COLOR_RESET, t,
+	printf("%10lld %s%03ld" ANSI_COLOR_RESET " %s%s" ANSI_COLOR_RESET "\n", t,
 		vars()->color[color_index], id + 1, color, msg);
 }

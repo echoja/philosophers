@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:01:58 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/11 08:48:28 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/11 09:24:14 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,5 @@ int
 	if (tj(starter[0], (void **)&i, "even join failed") ||
 		tj(starter[1], (void **)&i, " odd join failed"))
 		return (1);
-	safe_exit(0);
-	return (0);
+	return (safe_exit(0));
 }

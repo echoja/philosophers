@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:07:00 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/11 10:48:53 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/12 09:47:09 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int
 	while (++i < nop)
 	{
 		vars()->recent_meal[i] = t;
-		vars()->available_forks[i] = 2;
 		if (vars()->notepme > 0)
 			vars()->remained_times[i] = vars()->notepme;
 		else
@@ -47,25 +46,24 @@ int
 int
 	init(void)
 {
-	long		i;
 	long		nop;
 
 	nop = vars()->nop;
+	su(SN_FORKS, "pf unlink failed");
+	su(SN_DIED, "sds unlink failed");
+	su(SN_MSG, "msem unlink failed");
+	if (so(&vars()->forks, SN_FORKS, nop, "philo forks sem open failed") ||
+		so(&vars()->somebody_died, SN_DIED, 1, "sbdy died sem open failed") ||
+		so(&vars()->msg_sem, SN_MSG, 1, "msg_sem open failed"))
+		return (1);
 	if (!m(&vars()->philos, sizeof(pthread_t) * nop) ||
-		!m(&vars()->locks, sizeof(pthread_mutex_t) * nop) ||
 		!m(&vars()->remained_times, sizeof(long) * nop) ||
-		!m(&vars()->available_forks, sizeof(long) * nop) ||
+		!m(&vars()->pid, sizeof(pid_t) * nop) ||
 		!m(&vars()->recent_meal, sizeof(uint64_t) * nop))
 		return (print_and_return_code(1, "memory allocation error"));
 	if (mi(&vars()->once, "once init failed"))
 		return (1);
-	if (mi(&vars()->somebody_died_lock, "somebody_died_lock init failed"))
-		return (1);
 	if (mi(&vars()->even_first_lock, "even_first_lock init failed"))
 		return (1);
-	i = -1;
-	while (++i < nop)
-		if (mi(&vars()->locks[i], "mutex init failed"))
-			return (1);
 	return (init2());
 }

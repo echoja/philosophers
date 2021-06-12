@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_msg.c                                          :+:      :+:    :+:   */
+/*   vars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/02 13:52:11 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 08:18:36 by taehokim         ###   ########.fr       */
+/*   Created: 2021/06/01 10:47:24 by taehokim          #+#    #+#             */
+/*   Updated: 2021/06/12 09:47:21 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void
-	put_msg(uint64_t t, long id, const char *color, const char *msg)
+int
+	is_finished(long id)
 {
-	int	color_index;
+	return (vars()->notepme != 0 && vars()->remained_times[id] < 1);
+}
 
-	color_index = id % 6;
-	t = t - vars()->start;
-	printf("%10lld %s%03ld" ANSI_COLOR_RESET " %s%s\n" ANSI_COLOR_RESET, t,
-		vars()->color[color_index], id + 1, color, msg);
+t_vars
+	*vars(void)
+{
+	static t_vars	t;
+
+	return (&t);
+}
+
+int
+	is_somebody_died(void)
+{
+	sp(vars()->somebody_died, "is_somebody_died post error");
+	if (sem_wait(vars()->somebody_died))
+	{
+		printf("somebody died!\n");
+		return (1);
+	}
+	return (0);
 }

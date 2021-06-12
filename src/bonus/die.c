@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_msg.c                                          :+:      :+:    :+:   */
+/*   die.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/02 13:52:11 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 08:18:36 by taehokim         ###   ########.fr       */
+/*   Created: 2021/06/02 16:02:05 by taehokim          #+#    #+#             */
+/*   Updated: 2021/06/07 19:09:15 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
+#include <unistd.h>
 #include "philosophers.h"
 
-void
-	put_msg(uint64_t t, long id, const char *color, const char *msg)
+long
+	die(long id, uint64_t now, uint64_t after)
 {
-	int	color_index;
-
-	color_index = id % 6;
-	t = t - vars()->start;
-	printf("%10lld %s%03ld" ANSI_COLOR_RESET " %s%s\n" ANSI_COLOR_RESET, t,
-		vars()->color[color_index], id + 1, color, msg);
+	if (after)
+		msleep(after);
+	msg_die(now + after, id);
+	return (0);
 }

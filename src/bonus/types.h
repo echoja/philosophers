@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:00:23 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/11 10:48:53 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/12 09:23:13 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/time.h>
 # include <sys/types.h>
+# include <semaphore.h>
 # include <stdint.h>
 # include <pthread.h>
 
@@ -30,10 +31,10 @@ struct	s_vars
 	long			tts;
 	long			notepme;
 	long			*remained_times;
-	long			*available_forks;
-	long			somebody_died;
-	pthread_mutex_t	somebody_died_lock;
-	pthread_mutex_t	*locks;
+	sem_t			*forks;
+	sem_t			*somebody_died;
+	sem_t			*msg_sem;
+	pid_t			*pid;
 	pthread_mutex_t even_first_lock;
 	uint64_t		*recent_meal;
 	uint64_t		start;

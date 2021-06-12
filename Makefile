@@ -6,7 +6,7 @@
 #    By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/27 17:17:01 by taehokim          #+#    #+#              #
-#    Updated: 2021/06/11 08:51:34 by taehokim         ###   ########.fr        #
+#    Updated: 2021/06/12 09:49:57 by taehokim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,23 @@ MAND_SRCS = \
 	src/mand/watcher.c \
 	src/mand/main.c
 
-BONUS_SRC = src/bonus/main.clean
+BONUS_SRC = \
+	src/bonus/resource.c \
+	src/bonus/process.c \
+	src/bonus/start.c \
+	src/bonus/vars.c \
+	src/bonus/init.c \
+	src/bonus/time.c \
+	src/bonus/semaphore.c \
+	src/bonus/semaphore_open.c \
+	src/bonus/put_msg.c \
+	src/bonus/msg.c \
+	src/bonus/die.c \
+	src/bonus/philo_job.c \
+	src/bonus/mutex.c \
+	src/bonus/thread.c \
+	src/bonus/watcher.c \
+	src/bonus/main.c
 
 OBJECTS = $(SOURCES:.c=.o)
 MAND_OBJ = $(MAND_SRCS:.c=.o)
@@ -42,6 +58,8 @@ CC = gcc
 
 all: $(NAME)
 
+bonus: $(BONUS_NAME)
+
 $(MAND_OBJ): %.o: %.c
 	$(CC) -c $(FLAGS) $< -o $@ $(INC_DIR)
 
@@ -51,7 +69,7 @@ $(BONUS_OBJ): %.o: %.c
 $(NAME): $(MAND_OBJ)
 	$(CC) $(FLAGS) $^ -o $@ $(INC_DIR) $(LIBS)
 
-checker: $(BONUS_OBJ)
+$(BONUS_NAME): $(BONUS_OBJ)
 	$(CC) $(FLAGS) $^ -o $@ $(INC_DIR) $(LIBS)
 
 fclean: clean
