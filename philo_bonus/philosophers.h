@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:21:25 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 09:47:15 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/14 20:16:39 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int
 tc_step_2(long init_i);
 
 void
-wait_subprocesses(long init_i);
+wait_subprocesses(long init_i, long finish_count);
 
 void
 kill_subprocesses(void);

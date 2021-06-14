@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/11 10:03:10 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 09:45:50 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/14 20:23:09 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 }
 
 void
-	wait_subprocesses(long init_i)
+	wait_subprocesses(long init_i, long finish_count)
 {
 	long	i;
 	int		status;
@@ -60,7 +60,7 @@ void
 			break ;
 		else if (res != 0)
 			success_count++;
-		if (success_count == vars()->nop)
+		if (success_count == finish_count)
 			break ;
 		usleep(10000);
 		i += 2;

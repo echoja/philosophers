@@ -6,7 +6,7 @@
 /*   By: taehokim <taehokim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 11:01:58 by taehokim          #+#    #+#             */
-/*   Updated: 2021/06/12 09:46:26 by taehokim         ###   ########.fr       */
+/*   Updated: 2021/06/14 20:22:48 by taehokim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,21 @@ void
 	*start_philo_half(void *even)
 {
 	long	init_i;
+	long	finish_count;
 
 	if ((long)even)
+	{
 		init_i = 0;
+		finish_count = (vars()->nop + 1) / 2;
+	}
 	else
+	{
 		init_i = 1;
+		finish_count = vars()->nop / 2;
+	}
 	if (tc_step_2(init_i))
 		return ((void *)1);
-	wait_subprocesses(init_i);
+	wait_subprocesses(init_i, finish_count);
 	return (0);
 }
 
