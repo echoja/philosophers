@@ -2,6 +2,6 @@ src/test.c
 *.o
 *.dSYM
 test
-philo
-philo_bonus
+philo/philo
+philo_bonus/philo_bonus
 .vscode
